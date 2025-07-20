@@ -1,0 +1,17 @@
+{
+  "name": "yaban.web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "compile:sass": "sass wwwroot/scss/custom.scss wwwroot/css/site.css",
+    "watch:sass": "sass --watch wwwroot/scss/custom.scss:wwwroot/css/site.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "",
+  "devDependencies": {
+    "sass": "^1.89.2"
+  }
+}

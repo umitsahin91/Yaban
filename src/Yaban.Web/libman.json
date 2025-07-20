@@ -2,10 +2,10 @@
   "version": "3.0",
   "defaultProvider": "cdnjs",
   "libraries": [
-    {
-      "library": "bootstrap@5.3.3",
-      "destination": "wwwroot/lib/bootstrap"
-    },
+    //{
+    //  "library": "bootstrap@5.3.3",
+    //  "destination": "wwwroot/lib/bootstrap"
+    //},
     {
       "library": "bootstrap-icons@1.11.3",
       "destination": "wwwroot/lib/bootstrap-icons"
@@ -23,9 +23,19 @@
       "destination": "wwwroot/lib/isotope-layout"
     },
     {
-      "provider": "unpkg",
+      "provider": "jsdelivr",
       "library": "swiper@11.1.4",
       "destination": "wwwroot/lib/swiper"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "admin-lte@3.2.0",
+      "destination": "wwwroot/lib/admin-lte/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "bootstrap@4.6.2",
+      "destination": "wwwroot/lib/bootstrap4/"
     }
   ]
 }

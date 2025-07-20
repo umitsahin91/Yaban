@@ -1,0 +1,65 @@
+﻿<header class="position-relative">
+    <!-- MASAÜSTÜ İÇİN ÜSTTE DURAN LOGO -->
+    <a href="#" class="d-none d-lg-block position-absolute top-50 start-0 translate-middle-y ms-5 p-3 bg-light rounded-circle shadow z-2">
+        <i class="bi bi-shield-fill text-primary fs-1"></i>
+    </a>
+
+    <!-- Üst Bilgi Çubuğu (Bootstrap 'warning' rengi ile) -->
+    <div class="bg-warning d-none d-lg-block">
+        <div class="container px-lg-5 py-1 text-end">
+            <i class="bi bi-three-dots text-dark"></i>
+        </div>
+    </div>
+
+    <!-- Ana Gezinme Çubuğu (Bootstrap 'primary' rengi ile) -->
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid px-lg-5">
+
+            <!-- MOBİL İÇİN LOGO -->
+            <a class="navbar-brand fw-bold fs-4 d-lg-none" href="#">
+                <i class="bi bi-shield-fill"></i>
+                LOGO
+            </a>
+
+            <!-- Mobil Hamburger Menü Butonu -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Gezinme Linkleri (Açılır/Kapanır) -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- MASAÜSTÜNDE LOGO İÇİN BOŞLUK OLUŞTURMA -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-5 ps-lg-5">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Takımlar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Fikstür</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sonuçlar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Haberler</a>
+                    </li>
+                </ul>
+
+                <!-- Sağ Taraftaki Elementler -->
+                <div class="d-flex align-items-center flex-wrap gap-2">
+                    <!-- Dil Seçimi, vb. -->
+                    <div class="dropdown">
+                        <a href="#" class="nav-link dropdown-toggle text-white fw-bold" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            EN
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="#">English</a></li>
+                            <li><a class="dropdown-item" href="#">Italiano</a></li>
+                            <li><a class="dropdown-item" href="#">Türkçe</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
