@@ -1,7 +1,32 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Yaban.Web.Domain.Entities;
+using Yaban.Web.Infrastructure.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//==================================================
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlite(connectionString));
+
+builder.Services.AddIdentity<AppUser, AppRole>(options =>
+{
+    options.Password.RequiredLength = 3;
+    options.Password.RequireDigit = false;
+    // Diğer şifre kuralları...
+})
+.AddEntityFrameworkStores<ApplicationDbContext>();
+
+// COOKIE AYARLARI
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+    options.ExpireTimeSpan = TimeSpan.FromDays(30);
+});
 
 var app = builder.Build();
 
@@ -16,7 +41,11 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+// AUTHENTICATION VE AUTHORIZATION'I AKTİF ETME
+// Bu iki satır UseRouting'den sonra ve MapControllerRoute'dan önce olmalı.
+app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.MapStaticAssets();
 
