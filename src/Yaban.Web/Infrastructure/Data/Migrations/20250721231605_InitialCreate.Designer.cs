@@ -11,7 +11,7 @@ using Yaban.Web.Infrastructure.Data;
 namespace Yaban.Web.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250721220947_InitialCreate")]
+    [Migration("20250721231605_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

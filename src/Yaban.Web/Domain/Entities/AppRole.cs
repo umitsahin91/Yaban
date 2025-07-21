@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Yaban.Web.Domain.Entities
+namespace Yaban.Web.Domain.Entities;
+
+public class AppRole : IdentityRole<Guid>
 {
-    public class AppRole : IdentityRole<Guid>
-    {
-    }
 }

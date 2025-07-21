@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Yaban.Web.Domain.Entities;
 using Yaban.Web.Infrastructure.Data;
 
@@ -28,6 +29,8 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.ExpireTimeSpan = TimeSpan.FromDays(30);
 });
 
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -39,6 +42,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseRouting();
 
 // AUTHENTICATION VE AUTHORIZATION'I AKTİF ETME
@@ -58,5 +62,60 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
+
+// Veritabanını başlangıç verileriyle tohumlamak için bir alan (scope) oluşturuyoruz.
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    try
+    {
+        var userManager = services.GetRequiredService<UserManager<AppUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
+
+        logger.LogInformation("Veritabanı tohumlama işlemi başlıyor.");
+
+        // 1. "Admin" ROLÜNÜ OLUŞTURMA
+        //---------------------------------
+        // "Admin" adında bir rol var mı diye kontrol et
+        if (!await roleManager.RoleExistsAsync("Admin"))
+        {
+            // Eğer yoksa, yeni bir "Admin" rolü oluştur.
+            await roleManager.CreateAsync(new AppRole { Name = "Admin" });
+            logger.LogInformation("Admin rolü oluşturuldu.");
+        }
+
+        // 2. İLK ADMİN KULLANICISINI OLUŞTURMA
+        //---------------------------------
+        // Belirtilen e-posta adresine sahip bir kullanıcı var mı diye kontrol et
+        if (await userManager.FindByEmailAsync("admin@yaban.com") == null)
+        {
+            // Eğer yoksa, yeni bir admin kullanıcısı oluştur.
+            var adminUser = new AppUser
+            {
+                UserName = "admin@yaban.com",
+                Email = "admin@yaban.com",
+                EmailConfirmed = true // E-posta doğrulaması gerektirmemesi için true yapıyoruz.
+            };
+
+            // Kullanıcıyı belirtilen şifreyle oluştur.
+            // DİKKAT: Bu şifreyi canlı ortamda çok daha güçlü bir şeyle değiştirin!
+            var result = await userManager.CreateAsync(adminUser, "Sifre123!");
+
+            if (result.Succeeded)
+            {
+                logger.LogInformation("Admin kullanıcısı oluşturuldu.");
+                // Eğer kullanıcı başarıyla oluşturulduysa, onu "Admin" rolüne ata.
+                await userManager.AddToRoleAsync(adminUser, "Admin");
+                logger.LogInformation("Admin kullanıcısı Admin rolüne atandı.");
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+        // Tohumlama sırasında bir hata olursa logla.
+        logger.LogError(ex, "Veritabanı tohumlama sırasında bir hata oluştu.");
+    }
+}
 
 app.Run();
