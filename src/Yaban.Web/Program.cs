@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Yaban.Web.Application;
 using Yaban.Web.Domain.Entities;
 using Yaban.Web.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddApplicationServices();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

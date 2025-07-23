@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Yaban.Web.Areas.Admin.Controllers
+namespace Yaban.Web.Areas.Admin.Controllers;
+
+
+public class DashboardController : AdminBaseController
 {
-   
-    public class DashboardController : AdminBaseController
+    public IActionResult Index()
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        return View();
     }
 }
