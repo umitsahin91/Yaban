@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FluentValidation.AspNetCore;
+using FluentValidation;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Yaban.Web.Application;
 using Yaban.Web.Domain.Entities;
 using Yaban.Web.Infrastructure.Data;
+using Yaban.Web.Services.Notification;
+using Yaban.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +14,11 @@ builder.Services.AddApplicationServices();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// FluentValidation'ı ekle
+builder.Services.AddFluentValidationAutoValidation();
+// Validator sınıflarının bulunduğu Assembly'yi (Application katmanı) tara ve hepsini DI'a kaydet
+builder.Services.AddValidatorsFromAssembly(typeof(YabanAssembly).Assembly);
 
 //==================================================
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -32,7 +41,8 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.ExpireTimeSpan = TimeSpan.FromDays(30);
 });
 
-
+builder.Services.AddScoped<IAlertService, AlertService>();
+builder.Services.AddHttpContextAccessor(); // HttpContext erişimi için gerekli
 
 var app = builder.Build();
 

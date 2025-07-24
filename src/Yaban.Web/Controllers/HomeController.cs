@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Yaban.Web.Models;
 
@@ -13,19 +13,9 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
-    {
-        return View();
-    }
-
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
+    public IActionResult Index() => View();       // Ana sayfa
+    public IActionResult About() => View();       // Hakkımızda
+    public IActionResult Contact() => View();     // İletişim
+    public IActionResult Services() => View();    // Hizmetler
+    public IActionResult Projects() => View();
 }

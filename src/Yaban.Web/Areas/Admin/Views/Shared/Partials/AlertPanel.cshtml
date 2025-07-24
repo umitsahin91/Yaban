@@ -1,0 +1,62 @@
+﻿@using System.Text.Json;
+@using Yaban.Web.Services.Alert
+@inject IHttpContextAccessor httpContextAccessor
+@{
+
+    var messagesJson = TempData[AlertDefaults.AlertListKey] as string;
+}
+
+@if (!string.IsNullOrEmpty(messagesJson))
+{
+    <script>
+        $(function () {
+            // setTimeout fonksiyonu içine tüm bildirim gösterme mantığını taşıyoruz.
+            // 1000 milisaniye = 1 saniye. Bu değeri isteğine göre değiştirebilirsin.
+            setTimeout(function() {
+                var messages = @Html.Raw(messagesJson);
+
+                messages.forEach(function (message) {
+                    var alertType = message.Type;
+                    var alertMessage = message.Message;
+
+                    var title = '';
+                    var icon = '';
+                    var className = '';
+
+                    switch (alertType) {
+                        case 0: // Success
+                            title = 'Başarılı!';
+                            icon = 'fas fa-check';
+                            className = 'bg-success';
+                            break;
+                        case 1: // Error
+                            title = 'Hata!';
+                            icon = 'fas fa-times';
+                            className = 'bg-danger';
+                            break;
+                        case 2: // Warning
+                            title = 'Uyarı!';
+                            icon = 'fas fa-exclamation-triangle';
+                            className = 'bg-warning';
+                            break;
+                        default: // Info
+                            title = 'Bilgi';
+                            icon = 'fas fa-info';
+                            className = 'bg-info';
+                            break;
+                    }
+
+                    $(document).Toasts('create', {
+                        class: className,
+                        title: title,
+                        subtitle: 'Bildirim',
+                        body: alertMessage,
+                        icon: icon,
+                        autohide: true,
+                        delay: 5000
+                    });
+                });
+            }, 1000); // <-- GECİKME SÜRESİ BURADA BELİRTİLİYOR
+        });
+    </script>
+}
