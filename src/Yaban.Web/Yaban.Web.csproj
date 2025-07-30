@@ -31,6 +31,7 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Domain\Enums\" />
     <Folder Include="Infrastructure\Services\" />
+    <Folder Include="wwwroot\css\" />
   </ItemGroup>
 
 </Project>

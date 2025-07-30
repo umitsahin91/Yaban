@@ -1,32 +1,54 @@
 ﻿// ---------------------------------------------------------------------------
 // 1. GEREKLİ BOOTSTRAP PARÇALARINI İÇE AKTAR (LİBMAN KONUMUNDAN)
 // ---------------------------------------------------------------------------
-// Değişkenleri ezebilmek için önce Bootstrap fonksiyonlarını ve değişkenlerini import et.
-// Dikkat! Yollar 'node_modules' yerine 'lib/bootstrap' klasörünü gösteriyor.
-@import "../lib/bootstrap/scss/functions";
-@import "../lib/bootstrap/scss/variables";
+// Değişkenleri ezebilmek için önce Bootstrap fonksiyonlarını import et.
 
+
+@import "../lib/bootstrap/scss/functions";
 
 // ---------------------------------------------------------------------------
 // 2. KENDİ ÖZEL DEĞİŞKENLERİNİ TANIMLA
 // ---------------------------------------------------------------------------
 // Bootstrap'in varsayılan değerlerini burada değiştir.
-$primary: #D63384; // Bootstrap'in varsayılan mavisini pembeyle değiştir.
-$secondary: #6c757d;
+
+
+$primary: #990a2c; 
+$secondary: #fbba00;
 $font-family-base: "Inter", sans-serif;
 $border-radius: .25rem;
 $body-bg: #fff;
 
-
+@import "../lib/bootstrap/scss/variables";
 // ---------------------------------------------------------------------------
 // 3. BOOTSTRAP'İN GERİ KALANINI İÇE AKTAR
 // ---------------------------------------------------------------------------
 // Değişkenlerimiz tanımlandı, şimdi Bootstrap'i bu değişkenlerle derle.
 @import "../lib/bootstrap/scss/bootstrap";
 
-
 // ---------------------------------------------------------------------------
 // 4. KENDİ ÖZEL CSS/SCSS KURALLARIN
 // ---------------------------------------------------------------------------
 // Projeye özel stillerini buraya ekle.
 
+// Header yükseklikleri için özel değişkenler tanımlayalım
+$header-height-desktop: 88px;
+$header-height-mobile: 56px;
+
+// Bootstrap'in $lg değişkenine güvenmek yerine kendi breakpoint'imizi tanımlayalım
+$breakpoint-lg: 992px;
+
+.full-viewport-hero {
+    // Masaüstü için varsayılan yükseklik
+    height: calc(100vh - #{$header-height-desktop});
+
+    display: flex;
+
+    > * {
+        width: 100%;
+    }
+    // Tanımladığımız breakpoint'i kullanalım
+    @media (max-width: #{$breakpoint-lg - 1px}) {
+        // Mobil için yükseklik
+        height: calc(100vh - #{$header-height-mobile});
+    }
+}

@@ -7,6 +7,7 @@ using Yaban.Web.Domain.Entities;
 using Yaban.Web.Infrastructure.Data;
 using Yaban.Web.Services.Notification;
 using Yaban.Web;
+using Yaban.Web.Models.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +44,10 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 builder.Services.AddScoped<IAlertService, AlertService>();
 builder.Services.AddHttpContextAccessor(); // HttpContext erişimi için gerekli
+
+
+builder.Services.Configure<ScriptSettings>(builder.Configuration.GetSection("ScriptSettings"));
+
 
 var app = builder.Build();
 

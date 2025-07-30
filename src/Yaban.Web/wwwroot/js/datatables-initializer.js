@@ -42,16 +42,6 @@
             //language: { // Türkçe dil ayarları
             //    url: "//cdn.datatables.net/plug-ins/1.10.25/i18n/Turkish.json"
             //},
-
-            // === KOLON AYARLARI ===
-            // Kolon tanımlamalarını sunucudan (Controller'dan) gelen veriye göre
-            // dinamik olarak yapabilirsiniz. Eğer kolonlarınız sabitse ve sunucudan
-            // sadece veri dizisi geliyorsa, kolonları burada tanımlamanız gerekir.
-            // Genellikle bu kısmı sunucu tarafı yanıta bırakmak daha esnektir.
-            // Örnek: columns: [ { data: 'name' }, { data: 'position' } ]
-            // Bu örnekte, sunucunun JSON yanıtında "columns" propertysini göndermesini bekliyoruz.
-
-            // Varsayılan sıralama (örneğin ilk kolona göre artan)
             order: [[0, 'asc']]
         });
     });

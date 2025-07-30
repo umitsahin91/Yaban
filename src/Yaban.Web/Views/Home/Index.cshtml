@@ -1,43 +1,9 @@
-﻿@{
+﻿@model IndexViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
+@section Hero {
+    <partial name="~/Views/Home/Partials/Slider.cshtml" />
+}
 
-<!-- Bootstrap Carousel (Slider) -->
-<!-- data-bs-ride="carousel" niteliği otomatik geçişi sağlar -->
-<div id="heroCarousel" class="carousel slide full-viewport-slider" data-bs-ride="carousel">
-
-    <!-- Slider Göstergeleri (Alttaki çizgiler/noktalar) -->
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-
-    <div class="carousel-inner h-100">
-        <!-- Slide 1 -->
-        <div class="carousel-item active h-100">
-            <img src="https://placehold.co/1920x1080/212529/495057?text=SLIDE+1" class="d-block w-100 h-100 object-fit-cover" alt="Slider görseli 1">
-            <div class="carousel-caption d-none d-md-block text-start mb-5 pb-5">
-                <p class="text-warning fw-bold">BUY NOW</p>
-                <h2 class="display-1 fw-bold">HOME KIT 25-26</h2>
-            </div>
-        </div>
-        <!-- Slide 2 -->
-        <div class="carousel-item h-100">
-            <img src="https://placehold.co/1920x1080/343A40/6C757D?text=SLIDE+2" class="d-block w-100 h-100 object-fit-cover" alt="Slider görseli 2">
-            <div class="carousel-caption d-none d-md-block text-start mb-5 pb-5">
-                <p class="text-warning fw-bold">NEW ARRIVAL</p>
-                <h2 class="display-1 fw-bold">AWAY KIT</h2>
-            </div>
-        </div>
-        <!-- Slide 3 (Yeni eklendi) -->
-        <div class="carousel-item h-100">
-            <img src="https://placehold.co/1920x1080/495057/ADB5BD?text=SLIDE+3" class="d-block w-100 h-100 object-fit-cover" alt="Slider görseli 3">
-            <div class="carousel-caption d-none d-md-block text-start mb-5 pb-5">
-                <p class="text-warning fw-bold">LIMITED EDITION</p>
-                <h2 class="display-1 fw-bold">THIRD KIT</h2>
-            </div>
-        </div>
-    </div>
-    <!-- İleri/Geri okları buradan kaldırıldı -->
-</div>
+<partial name="~/Views/Home/Partials/Faq.cshtml" />

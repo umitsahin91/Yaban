@@ -1,0 +1,49 @@
+﻿@model SeoData
+
+@{
+    var displayTitle = Model.OgTitle ?? Model.Title;
+    var displayDescription = Model.OgDescription ?? Model.Description;
+}
+
+<title>@System.Net.WebUtility.HtmlEncode(Model.Title)</title>
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+    <meta name="description" content="@System.Net.WebUtility.HtmlEncode(Model.Description)" />
+}
+@if (!string.IsNullOrEmpty(Model.Keywords))
+{
+    <meta name="keywords" content="@System.Net.WebUtility.HtmlEncode(Model.Keywords)" />
+}
+<meta name="robots" content="@Model.Robots" />
+@if (!string.IsNullOrEmpty(Model.CanonicalUrl))
+{
+    <link rel="canonical" href="@Model.CanonicalUrl" />
+}
+
+<meta property="og:type" content="@Model.OgType" />
+@if (!string.IsNullOrEmpty(Model.OgSiteName))
+{
+    <meta property="og:site_name" content="@Model.OgSiteName" />
+}
+@if (!string.IsNullOrEmpty(Model.CanonicalUrl))
+{
+    <meta property="og:url" content="@Model.CanonicalUrl" />
+}
+<meta property="og:title" content="@System.Net.WebUtility.HtmlEncode(displayTitle)" />
+<meta property="og:description" content="@System.Net.WebUtility.HtmlEncode(displayDescription)" />
+@if (!string.IsNullOrEmpty(Model.OgImage))
+{
+    <meta property="og:image" content="@Model.OgImage" />
+}
+
+<meta name="twitter:card" content="@Model.TwitterCard" />
+@if (!string.IsNullOrEmpty(Model.TwitterSite))
+{
+    <meta name="twitter:site" content="@Model.TwitterSite" />
+}
+<meta name="twitter:title" content="@System.Net.WebUtility.HtmlEncode(displayTitle)" />
+<meta name="twitter:description" content="@System.Net.WebUtility.HtmlEncode(displayDescription)" />
+@if (!string.IsNullOrEmpty(Model.OgImage))
+{
+    <meta name="twitter:image" content="@Model.OgImage" />
+}

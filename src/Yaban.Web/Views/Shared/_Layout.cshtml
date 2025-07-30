@@ -1,17 +1,29 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Yaban.Web</title>
-    <partial name="_Styles" />
+
+    @if (Model is ISeoEnabledViewModel seoModel && seoModel.SeoInfo != null)
+    {
+        @await Component.InvokeAsync("Seo", new { seoData = seoModel.SeoInfo })
+    }
+    else
+    {
+        <title>YourProjectName</title>
+    }
+
+    <partial name="Partials/Styles"/>
+    <partial name="Partials/GoogleTagManager" model='"head"' />
 </head>
 <body>
+    <partial name="Partials/GoogleTagManager" model='"body"' />
     <partial name="Partials/Header" />
 
     @if (IsSectionDefined("Hero"))
     {
-        <div class="buraya-css-eklenmeli-unutma">
+        <div class="full-viewport-hero">
             @await RenderSectionAsync("Hero")
         </div>
     }
